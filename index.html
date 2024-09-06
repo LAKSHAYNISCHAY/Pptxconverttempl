@@ -112,7 +112,7 @@
         <div id="result">
             <p class="emoji">✅</p>
             <p>Conversion Complete!</p>
-            <a id="downloadLink" class="download-button" href="#" download>Download the Converted File</a>
+            <a id="downloadLink" class="download-button" href="https://example.com/placeholder.pptx" download>Download the Converted File</a>
         </div>
     </div>
     <script>
@@ -143,7 +143,7 @@
                     clearInterval(interval);
                     loading.style.display = 'none';
                     result.style.display = 'block';
-                    downloadLink.href = 'path/to/converted/file.pptx'; // Update with actual path
+                    downloadLink.href = 'https://example.com/converted-file.pptx'; // Update with actual path
                 }
                 progress.style.width = progressValue + '%';
                 progressText.textContent = 'Processing: ' + progressValue + '%';
