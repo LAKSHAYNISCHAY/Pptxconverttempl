@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPTX Template Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input[type="file"] {
+            margin: 20px 0;
+        }
+
+        button {
+            background: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        #loading {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background: #e0e0e0;
+            border-radius: 5px;
+            height: 20px;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .progress-bar .progress {
+            background: #007bff;
+            height: 100%;
+            width: 0;
+            border-radius: 5px;
+            transition: width 0.4s ease;
+        }
+
+        #result {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .download-button {
+            background: #28a745;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .download-button:hover {
+            background: #218838;
+        }
+
+        .emoji {
+            font-size: 24px;
+            display: block;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PPTX Template Converter</h1>
+        <input type="file" id="fileInput" accept=".pptx">
+        <button id="convertButton">Convert</button>
+        <div id="loading">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <p id="progressText">Processing: 0%</p>
+        </div>
+        <div id="result">
+            <p class="emoji">✅</p>
+            <p>Conversion Complete!</p>
+            <a id="downloadLink" class="download-button" href="#" download>Download the Converted File</a>
+        </div>
+    </div>
+    <script>
+        document.getElementById('convertButton').addEventListener('click', function() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a file.');
+                return;
+            }
+
+            const loading = document.getElementById('loading');
+            const result = document.getElementById('result');
+            const progress = document.querySelector('.progress');
+            const progressText = document.getElementById('progressText');
+            const downloadLink = document.getElementById('downloadLink');
+
+            loading.style.display = 'flex';
+            result.style.display = 'none';
+
+            let progressValue = 0;
+
+            const interval = setInterval(() => {
+                progressValue += 10;
+                if (progressValue > 100) {
+                    progressValue = 100;
+                    clearInterval(interval);
+                    loading.style.display = 'none';
+                    result.style.display = 'block';
+                    downloadLink.href = 'path/to/converted/file.pptx'; // Update with actual path
+                }
+                progress.style.width = progressValue + '%';
+                progressText.textContent = 'Processing: ' + progressValue + '%';
+            }, 500); // Simulate progress updates every 500ms
+        });
+    </script>
+</body>
+</html>
